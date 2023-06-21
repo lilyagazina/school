@@ -11,12 +11,11 @@ import java.util.Map;
 @Service
 public class StudentService {
     private Map<Long, Student> students = new HashMap<>();
-    private Long generatedId = 1L;
-
+    private long generatedId = 0;
 
     public Student createStudent(Student student) {
-        student.setId(generatedId++);
-        students. put(generatedId, student);
+        student.setId(++generatedId);
+        students.put(generatedId, student);
         return student;
     }
 
@@ -32,10 +31,12 @@ public class StudentService {
     public Student deleteStudent(Long studentId) {
         return students.remove(studentId);
     }
-    public Collection<Student> getAll() {
+
+    public Collection<Student> getAllStudent() {
         return students.values();
     }
-    public Collection <Student> findByAge(int age) {
+
+    public Collection<Student> findByAge(int age) {
         ArrayList<Student> result = new ArrayList<>();
         for (Student student : students.values()) {
             if (student.getAge() == age) {

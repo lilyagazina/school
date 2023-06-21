@@ -25,4 +25,8 @@ class FacultyServiceTest {
     @Test
     void findByColor() {
     }
+
+    @Test
+    void getAllFaculty() {
+    }
 }

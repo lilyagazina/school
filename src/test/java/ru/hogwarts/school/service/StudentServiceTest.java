@@ -23,7 +23,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void getAll() {
+    void getAllStudent() {
     }
 
     @Test

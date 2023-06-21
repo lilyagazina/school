@@ -49,18 +49,19 @@ public class StudentController {
     public Student deleteStudent(@PathVariable Long studentId) {
         return studentService.deleteStudent(studentId);
     }
+
     @GetMapping
-    public ResponseEntity <Collection<Student>> findStudents(@RequestParam(required = false) int age) {
+    public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) int age) {
         if (age > 0) {
             return ResponseEntity.ok(studentService.findByAge(age));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
 
-/*@GetMapping
+    @GetMapping("getAll")
     public ResponseEntity<Collection<Student>> getAllStudent() {
-        return ResponseEntity.ok(StudentService.getAll());
-    }*/
+        return ResponseEntity.ok(studentService.getAllStudent());
+    }
 }
 
 
