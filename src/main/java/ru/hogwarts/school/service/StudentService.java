@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,39 +11,33 @@ import java.util.Map;
 
 @Service
 public class StudentService {
-    private Map<Long, Student> students = new HashMap<>();
-    private long generatedId = 0;
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Student createStudent(Student student) {
-        student.setId(++generatedId);
-        students.put(generatedId, student);
-        return student;
+        return studentRepository.save(student);
     }
 
     public Student getStudentById(Long studentId) {
-        return students.get(studentId);
+        return studentRepository.findById(studentId).get();
     }
 
     public Student updateStudent(Long studentId, Student student) {
-        students.put(generatedId, student);
-        return student;
+        return studentRepository.save(student);
     }
 
-    public Student deleteStudent(Long studentId) {
-        return students.remove(studentId);
+    public void deleteStudent(Long studentId) {
+        studentRepository.deleteById(studentId);
     }
 
     public Collection<Student> getAllStudent() {
-        return students.values();
+        return studentRepository.findAll();
     }
 
     public Collection<Student> findByAge(int age) {
-        ArrayList<Student> result = new ArrayList<>();
-        for (Student student : students.values()) {
-            if (student.getAge() == age) {
-                result.add(student);
-            }
-        }
-        return result;
+        return studentRepository.findByAge(age);
     }
 }
