@@ -4,15 +4,19 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
+import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class FacultyService {
     private final FacultyRepository facultyRepository;
+    private final StudentRepository studentRepository;
 
-    public FacultyService(FacultyRepository facultyRepository) {
+    public FacultyService(FacultyRepository facultyRepository, StudentRepository studentRepository) {
         this.facultyRepository = facultyRepository;
+        this.studentRepository = studentRepository;
     }
 
     public Faculty createFaculty(Faculty faculty) {
@@ -36,7 +40,17 @@ public class FacultyService {
     }
 
     public Collection<Faculty> findByColorLike(String color) {
-        return facultyRepository.findByColorLike(color);
+        return facultyRepository.findByColorLikeIgnoreCase(color);
+    }
+
+    public Collection<Faculty> findByFacultyName(String name) {
+        return facultyRepository.findFacultyByNameIgnoreCase(name);
+    }
+
+    public Collection<Student> getStudent(Long facultyId) {
+        return studentRepository.findAll().stream()
+                .filter(student -> student.getFaculty().getId() == facultyId)
+                .collect(Collectors.toList());
     }
 
 }

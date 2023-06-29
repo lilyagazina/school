@@ -27,15 +27,6 @@ public class FacultyController {
     }
 
 
-    @GetMapping("{facultyId}")
-    public ResponseEntity<Faculty> getFacultyById(@PathVariable Long facultyId) {
-        Faculty createdFaculty = facultyService.getFacultyById(facultyId);
-        if (createdFaculty == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(createdFaculty);
-    }
-
     @PutMapping
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Long facultyId, Faculty faculty) {
         Faculty createdFaculty = facultyService.updateFaculty(facultyId, faculty);
@@ -47,14 +38,27 @@ public class FacultyController {
 
     @DeleteMapping("{facultyId}")
     public ResponseEntity deleteFaculty(@PathVariable Long facultyId) {
-         facultyService.deleteFaculty(facultyId);
-         return ResponseEntity.ok().build();
+        facultyService.deleteFaculty(facultyId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{facultyId}")
+    public ResponseEntity<Faculty> getFacultyById(@PathVariable Long facultyId) {
+        Faculty createdFaculty = facultyService.getFacultyById(facultyId);
+        if (createdFaculty == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(createdFaculty);
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Faculty>> findFaculties(@RequestParam(required = false) String color) {
+    public ResponseEntity<Collection<Faculty>> findFaculties(@RequestParam(required = false) String color,
+                                                             @RequestParam(required = false) String name) {
         if (color != null && !color.isBlank()) {
             return ResponseEntity.ok(facultyService.findByColorLike(color));
+        }
+        if (name != null && !name.isBlank()) {
+            return ResponseEntity.ok(facultyService.findByFacultyName(name));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
@@ -62,5 +66,10 @@ public class FacultyController {
     @GetMapping("getAll")
     public ResponseEntity<Collection<Faculty>> getAllFaculty() {
         return ResponseEntity.ok(facultyService.getAllFaculty());
+    }
+
+    @GetMapping("/students/{facultyId}")
+    public ResponseEntity<Collection<Student>> getStudent(@RequestParam(required = false) Long facultyId) {
+        return ResponseEntity.ok(facultyService.getStudent(facultyId));
     }
 }

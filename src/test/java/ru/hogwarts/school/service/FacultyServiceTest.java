@@ -57,7 +57,7 @@ class FacultyServiceTest {
     @Test
     void findByColor() {
         Faculty f = new Faculty(1L, "Gryffindor", "red");
-        when(facultyRepository.findByColorLike("red")).thenReturn(List.of(f));
+        when(facultyRepository.findByColorLikeIgnoreCase("red")).thenReturn(List.of(f));
         assertEquals(List.of(f), out.findByColorLike("red"));
     }
 
