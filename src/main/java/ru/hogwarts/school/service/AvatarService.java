@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.AvatarRepository;
+import ru.hogwarts.school.repository.StudentRepository;
 
 import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
@@ -24,13 +25,13 @@ public class AvatarService {
 
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
-
     private final StudentService studentService;
     private final AvatarRepository avatarRepository;
 
     public AvatarService(StudentService studentService, AvatarRepository avatarRepository) {
         this.studentService = studentService;
         this.avatarRepository = avatarRepository;
+
     }
 
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
