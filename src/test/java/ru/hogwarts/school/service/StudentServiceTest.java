@@ -26,7 +26,7 @@ class StudentServiceTest {
 
     @Test
     void createStudent() {
-        Student s = new Student(1L, "Lili", 24);
+        Student s = new Student(1L, "Lili", 24,null);
         when(studentRepository.save(s)).thenReturn(s);
         assertEquals(s, out.createStudent(s));
 
@@ -34,7 +34,7 @@ class StudentServiceTest {
 
     @Test
     void getStudentById() {
-        Student s = new Student(1L, "Lili", 24);
+        Student s = new Student(1L, "Lili", 24,null);
         when(studentRepository.findById(1L)).thenReturn(Optional.of(s));
         assertEquals(s, out.getStudentById(1L));
     }
@@ -47,14 +47,14 @@ class StudentServiceTest {
 
     @Test
     void updateStudent() {
-        Student s = new Student(1L, "Dima", 14);
+        Student s = new Student(1L, "Dima", 14, null);
         when(studentRepository.save(s)).thenReturn(s);
         assertEquals(s, out.updateStudent(1L, s));
     }
 
     @Test
     void findByAge() {
-        Student s = new Student(1L, "Lili", 24);
+        Student s = new Student(1L, "Lili", 24,null);
         when(studentRepository.findByAge(24)).thenReturn(List.of(s));
         assertEquals(List.of(s), out.findByAge(24));
     }
