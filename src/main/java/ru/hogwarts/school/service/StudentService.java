@@ -1,19 +1,11 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.repository.AvatarRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
-
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 
 @Service
@@ -62,4 +54,16 @@ public class StudentService {
         return student.getFaculty();
 
     }
+    public Long getTotalNumberStudents(){
+       return studentRepository.getTotalNumberStudents();
+
+    }
+
+    public Long getAverageAgeStudents(){
+       return studentRepository.getAverageAgeStudents();
+    }
+    public Collection<Student> getLastFiveStudents(){
+       return studentRepository.getLastFiveStudents();
+    }
+
 }

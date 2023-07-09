@@ -1,22 +1,12 @@
 package ru.hogwarts.school.controller;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
 
 
@@ -89,6 +79,19 @@ public class StudentController {
         }
         return ResponseEntity.ok(createdStudent);
     }
+    @GetMapping("/totalNumber")
+    public ResponseEntity<Long> getTotalNumberStudents(){
+        return ResponseEntity.ok(studentService.getTotalNumberStudents());
+    }
+    @GetMapping("/averageAge")
+    public ResponseEntity<Long> getAverageAgeStudents(){
+        return ResponseEntity.ok(studentService.getAverageAgeStudents());
+    }
+    @GetMapping("/lastFiveStudents")
+    public ResponseEntity<Collection<Student>> getLastFiveStudents(){
+        return ResponseEntity.ok(studentService.getLastFiveStudents());
+    }
+
 }
 
 
