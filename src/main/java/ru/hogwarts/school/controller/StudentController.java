@@ -8,6 +8,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -91,6 +92,7 @@ public class StudentController {
     public ResponseEntity<Collection<Student>> getLastFiveStudents(){
         return ResponseEntity.ok(studentService.getLastFiveStudents());
     }
+
 
 }
 
