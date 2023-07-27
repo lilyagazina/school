@@ -80,17 +80,38 @@ public class StudentController {
         }
         return ResponseEntity.ok(createdStudent);
     }
+
     @GetMapping("/totalNumber")
-    public ResponseEntity<Long> getTotalNumberStudents(){
+    public ResponseEntity<Long> getTotalNumberStudents() {
         return ResponseEntity.ok(studentService.getTotalNumberStudents());
     }
+
     @GetMapping("/averageAge")
-    public ResponseEntity<Long> getAverageAgeStudents(){
+    public ResponseEntity<Long> getAverageAgeStudents() {
         return ResponseEntity.ok(studentService.getAverageAgeStudents());
     }
+
     @GetMapping("/lastFiveStudents")
-    public ResponseEntity<Collection<Student>> getLastFiveStudents(){
+    public ResponseEntity<Collection<Student>> getLastFiveStudents() {
         return ResponseEntity.ok(studentService.getLastFiveStudents());
+    }
+
+    @GetMapping("/nameStartWithA")
+    public List<String> getNameStartWithA() {
+        return studentService.getNameStartWithA();
+    }
+
+    @GetMapping("/averAge")
+    public double getAverageAgeAllStudents() {
+        return studentService.getAverageAgeAllStudents();
+    }
+    @GetMapping("/sum")
+    public Integer sum() {
+        return studentService.sum();
+    }
+    @GetMapping("/sumSecond")
+    public Integer sumSecond() {
+        return studentService.sumSecond();
     }
 
 
