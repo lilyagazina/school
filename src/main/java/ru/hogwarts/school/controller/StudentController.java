@@ -114,6 +114,16 @@ public class StudentController {
         return studentService.sumSecond();
     }
 
+    @GetMapping("/thread")
+    public void thread() {
+        studentService.taskThread();
+    }
+
+    @GetMapping("/threadSync")
+    public void threadSync() {
+        studentService.taskThreadSync();
+    }
+
 
 }
 
